@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block body %}
+<table class="table table-striped">
+<thead>
+<th>URL</th><th>Title</th>
+</thead>
+<tbody>
+{% for r in results %}
+<tr>
+<td>{{ r.url }}</td> <td>{{ r.result }}</td>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

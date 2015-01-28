@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Вход</h1>
+<form action="" method="post" name="login">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.user }}
+        {% for error in form.errors.user %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}<br>
+    </p>
+    <p>{{ form.password }}</p>
+    <p><input type="submit" value="Войти" class="btn btn-large btn-primary"></p>
+</form>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}Test app{% endblock %}</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
+</head>
+<body>
+<div class="nav navbar navbar-inverse" role="navigation">
+<div class="container">
+<ul class="nav navbar-nav">
+<li>
+<a href="{{ url_for('index') }}">Главная</a>
+</li>
+{% if g.user.is_authenticated() %}
+<li>
+<a href="{{ url_for('admin') }}">Настройки</a>
+</li>
+{% endif %}
+</ul>
+{% if g.user.is_authenticated() %}
+<p class="navbar-text navbar-right">Вы вошли как {{ g.user.id }} <a href="{{ url_for('logout') }}" class="navbar-link">Выйти</a></p>
+{% else %}
+<p class="navbar-text navbar-right"><a href="{{ url_for('login') }}" class="navbar-link">Войти</a></p>
+{% endif %}
+</div>
+</div>
+<div class="container">
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-info" role="alert">
+    {{ message }}
+    </div>
+{% endfor %}
+
+{% block body %}
+{% endblock %}
+</div>
+
+
+</body>

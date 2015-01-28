@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}Настройки{% endblock %}
+{% block body %}
+<h1>URLs</h1>
+{% if urls %}
+<table class="table table-striped">
+<thead>
+<th>URL</th><th></th>
+</thead>
+<tbody>
+{% for u in urls %}
+<tr><td>  
+{{ u.url }}
+</td><td>
+<form action="{{ url_for("delete_url") }}" method="post" name="delete_url">
+<input type="hidden" value="{{ u.filename }}" name="id">
+<input type="submit" value="Удалить" class="btn btn-danger btn-xs pull-right">
+</form>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<div class="alert alert-error">Нет URL в списке</div>
+{% endif %}
+<h2>Добавить URL</h2>
+<form action="" method="post" name="admin">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.url }}
+        {% for error in form.errors.url %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    <p><input type="submit" value="Добавить" class="btn btn-success"></p>
+</form>
+{% endblock %}
